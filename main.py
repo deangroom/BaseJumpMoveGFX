@@ -22,7 +22,7 @@ y = 250  #position of rect
 
 
 vel = 5 #velocity or attack value
-jumpMax = 10 #set the number of iterations for the jump maths
+jumpMax = 5 #set the number of iterations for the jump maths
 
 ### --- this is just to show you how abs (absolute value) works ###
 ### --- the absolute value of 20 is -20@
