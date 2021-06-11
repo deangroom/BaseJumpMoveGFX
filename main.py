@@ -5,16 +5,22 @@ pygame.init()
 x=0 #initialise x
 y=0 #initialise y
 
+width = 40 #sie of rect
+height = 40 #size of rect
+
 winx = 500
 winy = 300
 win = pygame.display.set_mode((winx,winy))
 pygame.display.set_caption("Left, Right and Jump")
 
+
+### basic graphics set up ###
+bg = pygame.image.load('images/bg.jpg')
+ship = pygame.image.load('images/ship.png')
+ship=pygame.transform.scale(ship,(width, height))
+
 ###---positioning the rect in the middle
 
-
-width = 10 #sie of rect
-height = 10 #size of rect
 
 ###--- position rect in middle and at the bottom---###
 x = 250 #position of rect
@@ -31,6 +37,16 @@ print('Absolute value of -20 is:', abs(integer))
 
 isJump = False #start the routine in jump flag set to false
 jumpCount = jumpMax # number of iterations for the jump loop.
+
+
+####--- Begin Def Routines ---####
+
+###-function for screen refresh
+
+def redrawGameWindow():
+  win.blit(bg, (0,0))  # This will draw our background image at (0,0)
+  win.blit(ship,(x,y))
+  pygame.display.update() 
 
 run = True
 
@@ -69,8 +85,7 @@ while run:
             jumpCount = jumpMax
             isJump = False
     
-    win.fill((0,0,0))
-    pygame.draw.rect(win, (255,0,0), (x, y, width, height))   
-    pygame.display.update() 
-    
+    #win.fill((0,0,0))
+    redrawGameWindow()
+  
 pygame.quit()
