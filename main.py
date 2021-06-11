@@ -16,6 +16,8 @@ pygame.display.set_caption("Left, Right and Jump")
 
 ### basic graphics set up ###
 bg = pygame.image.load('images/bg.jpg')
+bg=pygame.transform.scale(bg,(winx, winy))
+
 ship = pygame.image.load('images/ship.png')
 ship=pygame.transform.scale(ship,(width, height))
 
@@ -27,8 +29,8 @@ x = 250 #position of rect
 y = 250  #position of rect
 
 
-vel = 5 #velocity or attack value
-jumpMax = 5 #set the number of iterations for the jump maths
+vel = 10 #velocity or attack value
+jumpMax = 10 #set the number of iterations for the jump maths
 
 ### --- this is just to show you how abs (absolute value) works ###
 ### --- the absolute value of 20 is -20@
