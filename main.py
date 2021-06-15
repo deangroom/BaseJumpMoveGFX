@@ -8,10 +8,10 @@ clock = pygame.time.Clock()
 x=0 #initialise x
 y=0 #initialise y
 
-width = 70 #sie of rect
+width = 70 #size of rect
 height = 50 #size of rect
 
-winx = 500
+winx = 300
 winy = 200
 win = pygame.display.set_mode((winx,winy))
 pygame.display.set_caption("Blitz")
@@ -41,7 +41,7 @@ def redrawGameWindow():
 run = True
 
 while run:
-  pygame.time.delay(60) #setting game run speed
+  pygame.time.delay(1) #setting game run speed
 
   for event in pygame.event.get(): #listen for events
       if event.type == pygame.QUIT: #quit
@@ -49,18 +49,21 @@ while run:
 
   keys = pygame.key.get_pressed() #set variable for which key is pressed
 
-  ###---move plane right-X moves--###
 
-  clock.tick(60)
 
-  landed = False
-  while landed is False:
+  while x < winx:
+
     print('x',x,'y',y)
 
-# move plane x to the left and then drop down until it reaches the bottom right.
-      
-  redrawGameWindow()
+    x+=5
+    if x >= winx:
+      y+=20; x=0
+      break
+    if y > winy-60:
+      run = False
 
-  
+    pygame.time.delay(10)
+    
+    redrawGameWindow()  
 
 pygame.quit()
