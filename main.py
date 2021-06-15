@@ -1,69 +1,86 @@
 import pygame
 import sys
 pygame.init()
-
+ 
 clock = pygame.time.Clock()
-
+ 
 ###---setting up the window size using variables---###
 x=0 #initialise x
 y=0 #initialise y
-
+ 
 width = 70 #size of rect
 height = 50 #size of rect
-
-winx = 300
-winy = 200
+ 
+winx = 500
+winy = 250
 win = pygame.display.set_mode((winx,winy))
 pygame.display.set_caption("Blitz")
-
-
+ 
 ### basic graphics set up ###
 bg = pygame.image.load('images/bg.jpg')
 bg=pygame.transform.scale(bg,(winx, winy))
-
+ 
 plane = pygame.image.load('images/plane.png')
 plane=pygame.transform.scale(plane,(width, height))
 
+bomb = pygame.image.load('images/bomb.png')
+bomb =pygame.transform.scale(bomb,(20, 20))
+ 
 x = 0 #position of rect
-y = 0  #position of rect
+y = 0  
 
-vel = 50 #velocity or attack value
+bx=0
+by=0 #bomb co-ordinates
 
-isBomb = False #start the routine in bomb flag set to false
-
+speed=5 #plane speed
+bspeed=10 #bomb speed
+bombPress=False
+ 
 ####--- Begin Def Routines ---####
-
+ 
 def redrawGameWindow():
   win.blit(bg, (0,0))
   win.blit(plane,(x,y))
+  win.blit(bomb,(bx,by))
   pygame.display.update() 
-
+  
+ 
+####--- Begin Main Loop ---####
+ 
 run = True
-
+bombPress = False
+ 
 while run:
-  pygame.time.delay(1) #setting game run speed
-
+  pygame.time.delay(30) #setting game run speed
+ 
   for event in pygame.event.get(): #listen for events
-      if event.type == pygame.QUIT: #quit
-          run = False
-
-  keys = pygame.key.get_pressed() #set variable for which key is pressed
-
-
-
-  while x < winx:
-
-    print('x',x,'y',y)
-
-    x+=5
-    if x >= winx:
-      y+=20; x=0
-      break
-    if y > winy-60:
+    if event.type == pygame.QUIT: #quit
       run = False
-
-    pygame.time.delay(10)
-    
-    redrawGameWindow()  
-
+    if event.type == pygame.K_SPACE:
+      print('bombs away')
+      bombPress=True
+      by=y
+      
+  
+  #movement of plane
+  x +=speed
+  if x >= winx:
+    y +=height
+    x = 0
+ 
+  #Checking if the Plane has landed
+  landed = False
+  print(landed)
+  if x >= winx-width and y >= winy-height:
+    landed = True
+  
+  if landed is True:
+    print('The Plane has landed! ')
+    while landed is True:
+      x = winx-width
+      y = winy-height
+ 
+  redrawGameWindow()
+ 
 pygame.quit()
+
