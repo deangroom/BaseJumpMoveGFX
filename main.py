@@ -1,15 +1,18 @@
 import pygame
+import sys
 pygame.init()
+
+clock = pygame.time.Clock()
 
 ###---setting up the window size using variables---###
 x=0 #initialise x
 y=0 #initialise y
 
-width = 60 #sie of rect
-height = 40 #size of rect
+width = 70 #sie of rect
+height = 50 #size of rect
 
 winx = 500
-winy = 300
+winy = 200
 win = pygame.display.set_mode((winx,winy))
 pygame.display.set_caption("Blitz")
 
@@ -24,7 +27,7 @@ plane=pygame.transform.scale(plane,(width, height))
 x = 0 #position of rect
 y = 0  #position of rect
 
-vel = 10 #velocity or attack value
+vel = 50 #velocity or attack value
 
 isBomb = False #start the routine in bomb flag set to false
 
@@ -38,15 +41,26 @@ def redrawGameWindow():
 run = True
 
 while run:
-    pygame.time.delay(60) #setting game run speed
+  pygame.time.delay(60) #setting game run speed
 
-    for event in pygame.event.get(): #listen for events
-        if event.type == pygame.QUIT: #quit
-            run = False
+  for event in pygame.event.get(): #listen for events
+      if event.type == pygame.QUIT: #quit
+          run = False
 
-    keys = pygame.key.get_pressed() #set variable for which key is pressed
+  keys = pygame.key.get_pressed() #set variable for which key is pressed
 
-    
-    redrawGameWindow()
+  ###---move plane right-X moves--###
+
+  clock.tick(60)
+
+  landed = False
+  while landed is False:
+    print('x',x,'y',y)
+
+# move plane x to the left and then drop down until it reaches the bottom right.
+      
+  redrawGameWindow()
+
   
+
 pygame.quit()
