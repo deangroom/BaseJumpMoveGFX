@@ -34,14 +34,15 @@ by=0 #bomb co-ordinates
 
 speed=5 #plane speed
 bspeed=10 #bomb speed
-bombPress=False
+bombPress=False # bomb is invisible
  
 ####--- Begin Def Routines ---####
  
 def redrawGameWindow():
   win.blit(bg, (0,0))
   win.blit(plane,(x,y))
-  win.blit(bomb,(bx,by))
+  if bombPress is False: #true is visible and false is invisible
+    win.blit(bomb,(bx,by))
   pygame.display.update() 
   
  
@@ -52,14 +53,26 @@ bombPress = False
  
 while run:
   pygame.time.delay(30) #setting game run speed
+  by=y #track the plane
+  bx=x
  
-  for event in pygame.event.get(): #listen for events
-    if event.type == pygame.QUIT: #quit
-      run = False
-    if event.type == pygame.K_SPACE:
-      print('bombs away')
-      bombPress=True
-      by=y
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        pygame.quit(); sys.exit()
+        run = False
+  
+  ####--set up basic keys--###
+
+    if event.type == pygame.KEYDOWN:
+      if event.key == pygame.K_LEFT:
+          print('left')
+      if event.key == pygame.K_RIGHT:
+          print('right')
+      if event.key == pygame.K_UP:
+        print('jump')
+      if event.key == pygame.K_DOWN:
+        print('drop')
+
       
   
   #movement of plane
@@ -70,7 +83,6 @@ while run:
  
   #Checking if the Plane has landed
   landed = False
-  print(landed)
   if x >= winx-width and y >= winy-height:
     landed = True
   
