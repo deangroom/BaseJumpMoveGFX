@@ -35,14 +35,16 @@ by=0 #bomb co-ordinates
 speed=5 #plane speed
 bspeed=10 #bomb speed
 bombPress=False # bomb is invisible
+
+
+###---Classes---##
+
  
 ####--- Begin Def Routines ---####
  
 def redrawGameWindow():
   win.blit(bg, (0,0))
   win.blit(plane,(x,y))
-  if bombPress is False: #true is visible and false is invisible
-    win.blit(bomb,(bx,by))
   pygame.display.update() 
   
  
@@ -60,6 +62,12 @@ while run:
     if event.type == pygame.QUIT:
         pygame.quit(); sys.exit()
         run = False
+    
+    # Condition becomes true when keyboard is pressed   
+    if event.type == pygame.KEYDOWN:
+      if event.key == pygame.K_SPACE:
+        print("space pressed")
+
   
   ####--set up basic keys--###
 
@@ -71,7 +79,7 @@ while run:
       if event.key == pygame.K_UP:
         print('jump')
       if event.key == pygame.K_DOWN:
-        print('drop')
+        print(bombPress)
 
       
   
@@ -80,6 +88,9 @@ while run:
   if x >= winx:
     y +=height
     x = 0
+  
+  #movement of bomb
+  #if boomPress is True
  
   #Checking if the Plane has landed
   landed = False
