@@ -36,7 +36,6 @@ speed=5 #plane speed
 bspeed=10 #bomb speed
 bombPress=False # bomb is invisible
 
-
 ###---Classes---##
 
  
@@ -51,7 +50,6 @@ def redrawGameWindow():
 ####--- Begin Main Loop ---####
  
 run = True
-bombPress = False
  
 while run:
   pygame.time.delay(30) #setting game run speed
@@ -66,7 +64,12 @@ while run:
     # Condition becomes true when keyboard is pressed   
     if event.type == pygame.KEYDOWN:
       if event.key == pygame.K_SPACE:
+        #convert me to a function
         print("space pressed")
+        bombPress = True
+        print('bomb state is ', bombPress)
+        print('x = ',x)
+        print('y= ',y)
 
   
   ####--set up basic keys--###
